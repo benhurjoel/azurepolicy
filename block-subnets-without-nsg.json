@@ -1,0 +1,27 @@
+{
+    "properties": {
+      "displayName": "NSG on every subnet",
+      "policyType": "Custom",
+      "mode": "All",
+      "description": "This policy enforces a NSG on every subnet",
+      "metadata": {
+        "category": "VNET"      
+      },
+      "parameters": {},
+      "policyRule": {
+        "if": {
+                "allOf": [{
+                    "field": "type",
+                    "equals": "Microsoft.Network/virtualNetworks/subnets"
+                }, {
+                    "field": "Microsoft.Network/virtualNetworks/subnets/networkSecurityGroup.id",
+                    "exists": false
+                }]
+        },
+        "then": {
+            "effect": "deny"
+        }
+    }
+
+      }
+}  
